@@ -10,7 +10,6 @@ class FanaticalBundle extends Bundle
      * @return bool|string
      */
     public function getRawData(string $url): string {
-        echo "URL = $url\n";
         $data = file_get_contents($url);
         return $data;
     }
