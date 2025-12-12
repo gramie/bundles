@@ -70,7 +70,7 @@ abstract class Bundle {
      * Get data from an external source (humblebundles.com, etc.)
      * 
      * @param string $url
-     * @return void
+     * @return string
      */
     abstract public function getRawData(string $url) : string;
 
@@ -78,13 +78,13 @@ abstract class Bundle {
      * Take the raw data and convert it into an array of products
      * 
      * @param string $rawData
-     * @return void
+     * @return array
      */
     abstract public function processRawData(string $rawData) : array;
 
     /**
      * Get the columns that are displayed for this bundle source's products
-     * @return void
+     * @return array
      */
     abstract public function getBundleColumns() : array;
 
@@ -92,13 +92,13 @@ abstract class Bundle {
      * Render a single item from a bundle
      * 
      * @param array $item
-     * @return void
+     * @return array
      */
     abstract public function renderBundleItem(array $item) : array;
 
     /**
      * Go through a bundle source's bundles and get the newest 5
-     * @return void
+     * @return array
      */
-    abstract public function getNewestBundles($bundleCount = 5) : array;
+    abstract public function getNewestBundles(int $bundleCount = 5) : array;
 }

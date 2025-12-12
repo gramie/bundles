@@ -64,10 +64,10 @@ class FanaticalBundle extends Bundle
     /**
      * Implement abstract method
      * 
-     * @param mixed $bundleCount
+     * @param int $bundleCount
      * @return array
      */
-    public function getNewestBundles($bundleCount = 5): array {
+    public function getNewestBundles(int $bundleCount = 5): array {
         $result = [];
 
         foreach ($this->processedData as $type => $products) {
