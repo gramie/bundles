@@ -58,7 +58,7 @@ class HumbleBundle extends Bundle
             '<a href="' . $item['url'] . '" target="_new">' . $item['title'] . '</a>',
             $item['description'],
             date('Y-m-d', strtotime($item['start'])),
-             date('Y-m-d', strtotime($item['end'])),
+            $this->getEndDays(strtotime($item['end'])),
         ];
     }
 

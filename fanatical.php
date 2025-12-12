@@ -47,7 +47,7 @@ class FanaticalBundle extends Bundle
         return [
             '<a href="' . $item['url'] . '" target="_new">' . $item['title'] . '</a>',
             date('Y-m-d', $item['start']),
-             date('Y-m-d', $item['end']),
+            $this->getEndDays($item['end']),
         ];
     }
 

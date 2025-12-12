@@ -67,6 +67,37 @@ abstract class Bundle {
     }
 
     /**
+     * Calculate the time until the bundle finishes
+     * Show days (if more than 24 hours), or minutes and seconds
+     * 
+     * @param int $endDate
+     * @return string
+     */
+    public function getEndDays(int $endDate): string {
+        $secsPerDay = 24 * 3600;
+
+        $dateDiff = $endDate - time();
+
+        $days = floor($dateDiff / $secsPerDay);
+
+        if ($days < 0) {
+            return '<span style="color: red">Finished</span>';
+        }
+
+        if ($days > 1) {
+            return "$days days";
+        }
+
+        if ($days == 1) {
+            return "1 day";
+        }
+
+        $hours = floor($dateDiff / 3600);
+        $minutes = floor(($dateDiff - $hours * 3600) % 60);
+        return $hours . 'h ' . $minutes . 'm';
+    }
+
+    /**
      * Get data from an external source (humblebundles.com, etc.)
      * 
      * @param string $url
