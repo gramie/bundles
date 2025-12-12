@@ -36,7 +36,7 @@ abstract class Bundle {
         $result = '';
 
         // Show a "5 newest bundles"
-        $result .= $this->renderSingleBundle('newestbundles', $this->getNewestBundles());
+        $result .= $this->renderSingleBundle('newestbundles', $this->getNewestBundles(), 'Newest Bundles');
 
         foreach ($this->processedData as $name => $bundle) {
             $result .= $this->renderSingleBundle($name, $bundle) . "\n";
@@ -50,8 +50,11 @@ abstract class Bundle {
      * 
      * @return string
      */
-    private function renderSingleBundle(string $bundleType, array $bundleData) : string {
-        $result = "<h2>$bundleType</h2>"
+    private function renderSingleBundle(string $bundleType, array $bundleData, string $title = '') : string {
+        if (!$title) {
+            $title = $bundleType;
+        }
+        $result = "<div class='bundle-container'><h2>$title</h2>"
             . '<table id="' . $bundleType . '-table" class="bundle-table display ' . $this->bundleSource . 'bundletable">'
             . '<thead><tr><th>'
             . implode('</th><th>', $this->getBundleColumns())
@@ -62,7 +65,7 @@ abstract class Bundle {
             $result .= '<tr><td>' . implode('</td><td>', $this->renderBundleItem($item)) . '</td></tr>';
         }
 
-        $result .= '</tbody></table>';
+        $result .= '</tbody></table></div>';
         return $result;
     }
 

@@ -84,6 +84,13 @@ input:focus-visible + label {
   border-top: 1px solid #ccc;
 }
 
+.bundle-container {
+    border: 2px solid silver;
+    margin-top: 2em;
+    padding: 4px;
+    box-shadow: silver 4px 4px 8px;
+    background: antiquewhite;
+}
 
 .humblebundletable thead th:nth-child(1) {
   width: 30%;
@@ -93,22 +100,14 @@ input:focus-visible + label {
   width: 40%;
 }
 
-.humblebundletable thead th:nth-child(3) {
-  width: 15%;
-}
-
-.humblebundletable thead th:nth-child(3) {
-  width: 15%;
-}
-
 .fanaticalbundletable thead th:nth-child(1) {
   width: 70%;
 }
 
-.fanaticalbundletable thead th:nth-child(2) {
-  width: 15%;
-}
-
-.fanaticalbundletable thead th:nth-child(3) {
-  width: 15%;
+.fanaticalbundletable td:nth-child(2), 
+.fanaticalbundletable td:nth-child(3), 
+.humblebundletable td:nth-child(3), 
+.humblebundletable td:nth-child(4) {
+    width: 15%;
+    text-align: right;
 }
