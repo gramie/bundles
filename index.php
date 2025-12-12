@@ -1,6 +1,8 @@
 <?php
 require_once 'humble.php';
 require_once 'fanatical.php';
+
+$forceCacheClear = array_key_exists('clear', $_GET);
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,13 +23,13 @@ require_once 'fanatical.php';
             <section id="humble" class="tab-panel">
 <?php
 //print_r($hb);
-$hb = new HumbleBundle('humble', 'https://www.humblebundle.com/bundles', false);
+$hb = new HumbleBundle('humble', 'https://www.humblebundle.com/bundles', $forceCacheClear);
 echo $hb->renderBundles();
 ?>
             </section>
             <section id="fanatical" class="tab-panel">
 <?php
-$fb = new FanaticalBundle('fanatical', 'https://www.fanatical.com/api/algolia/bundles?altRank=false', false);
+$fb = new FanaticalBundle('fanatical', 'https://www.fanatical.com/api/algolia/bundles?altRank=false', $forceCacheClear);
 echo $fb->renderBundles();
 ?>
             </section>
