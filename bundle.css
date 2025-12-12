@@ -83,3 +83,32 @@ input:focus-visible + label {
   padding: 30px 0;
   border-top: 1px solid #ccc;
 }
+
+
+.humblebundletable thead th:nth-child(1) {
+  width: 30%;
+}
+
+.humblebundletable thead th:nth-child(2) {
+  width: 40%;
+}
+
+.humblebundletable thead th:nth-child(3) {
+  width: 15%;
+}
+
+.humblebundletable thead th:nth-child(3) {
+  width: 15%;
+}
+
+.fanaticalbundletable thead th:nth-child(1) {
+  width: 70%;
+}
+
+.fanaticalbundletable thead th:nth-child(2) {
+  width: 15%;
+}
+
+.fanaticalbundletable thead th:nth-child(3) {
+  width: 15%;
+}
