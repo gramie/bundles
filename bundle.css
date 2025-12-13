@@ -92,6 +92,10 @@ input:focus-visible + label {
     background: antiquewhite;
 }
 
+.bundle-container:first-child {
+    margin-top: 0;
+}
+
 .humblebundletable thead th:nth-child(1) {
   width: 30%;
 }

@@ -39,8 +39,8 @@ class HumbleBundle extends Bundle
                     'title' => $product['tile_short_name'],
                     'url' => 'https://www.humblebundle.com' . $product['product_url'],
                     'description' => $product['short_marketing_blurb'],
-                    'start' => $product['start_date|datetime'],
-                    'end' => $product['end_date|datetime'],
+                    'start' => strtotime($product['start_date|datetime']),
+                    'end' => strtotime($product['end_date|datetime']),
                 ];
             }
         }
@@ -57,8 +57,8 @@ class HumbleBundle extends Bundle
         return [
             '<a href="' . $item['url'] . '" target="_new">' . $item['title'] . '</a>',
             $item['description'],
-            date('Y-m-d', strtotime($item['start'])),
-            $this->getEndDays(strtotime($item['end'])),
+            date('Y-m-d', $item['start']),
+            $this->getEndDays($item['end']),
         ];
     }
 
@@ -77,10 +77,12 @@ class HumbleBundle extends Bundle
 
         foreach ($this->processedData as $type => $products) {
             foreach ($products as $product) {
-                $result[$product['start']] = $product;
+                $result[] = $product;
             }
         }
-        ksort($result);
+        usort($result, function($a, $b) {
+            return $a['start'] - $b['start'];
+        });
         return array_slice($result, -$bundleCount);
     }
 }

@@ -74,7 +74,9 @@ class FanaticalBundle extends Bundle
                 $result[$product['start']] = $product;
             }
         }
-        ksort($result);
+        usort($result, function($a, $b) {
+            return $a['start'] - $b['start'];
+        });
         return array_slice($result, -$bundleCount);
     }
 }
