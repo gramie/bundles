@@ -22,15 +22,20 @@ $forceCacheClear = array_key_exists('clear', $_GET);
         <div class="tab-panels">
             <section id="humble" class="tab-panel">
 <?php
-//print_r($hb);
-$hb = new HumbleBundle('humble', 'https://www.humblebundle.com/bundles', $forceCacheClear);
+$url = 'https://www.humblebundle.com/bundles';
+$hb = new HumbleBundle('humble', $url, $forceCacheClear);
 echo $hb->renderBundles();
 ?>
             </section>
             <section id="fanatical" class="tab-panel">
 <?php
-$fb = new FanaticalBundle('fanatical', 'https://www.fanatical.com/api/algolia/bundles?altRank=false', $forceCacheClear);
-echo $fb->renderBundles();
+try {
+    $url = 'https://www.fanatical.com/api/algolia/bundles?altRank=false';
+    $fb = new FanaticalBundle('fanatical', $url, $forceCacheClear);
+    echo $fb->renderBundles();
+} catch (Exception $e) {
+    echo "<div>Blocked by a bot catcher. Please go to <a href='$url'>$url</a> in your browser and then reload this page.</div>";
+}
 ?>
             </section>
         </div>
