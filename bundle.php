@@ -5,8 +5,6 @@ abstract class Bundle {
     var $processedData;
     var $updateTime;
 
-    var $defaultSortCol = 0;
-
     public function __construct($name, $url, $clearCache = false) {
         $this->bundleSource = $name;
 
@@ -45,7 +43,7 @@ abstract class Bundle {
         return $result;
     }
 
-        /**
+    /**
      * Render the products in a single bundle
      * 
      * @return string
@@ -106,7 +104,7 @@ abstract class Bundle {
      * @param string $url
      * @return string
      */
-    abstract public function getRawData(string $url) : string;
+    abstract protected function getRawData(string $url) : string;
 
     /**
      * Take the raw data and convert it into an array of products
@@ -114,13 +112,14 @@ abstract class Bundle {
      * @param string $rawData
      * @return array
      */
-    abstract public function processRawData(string $rawData) : array;
+    abstract protected function processRawData(string $rawData) : array;
 
     /**
      * Get the columns that are displayed for this bundle source's products
+     * 
      * @return array
      */
-    abstract public function getBundleColumns() : array;
+    abstract protected function getBundleColumns() : array;
 
     /**
      * Render a single item from a bundle
@@ -128,11 +127,12 @@ abstract class Bundle {
      * @param array $item
      * @return array
      */
-    abstract public function renderBundleItem(array $item) : array;
+    abstract protected function renderBundleItem(array $item) : array;
 
     /**
-     * Go through a bundle source's bundles and get the newest 5
+     * Go through a bundle source's bundles and get the newest 5 products
+     * 
      * @return array
      */
-    abstract public function getNewestBundles(int $bundleCount = 5) : array;
+    abstract protected function getNewestBundles(int $bundleCount = 5) : array;
 }

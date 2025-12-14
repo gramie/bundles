@@ -25,7 +25,7 @@ class HumbleBundle extends Bundle
     }
 
     /**
-     * Get data into associative array 
+     * Implement abstract method
      * 
      * @return void
      */
