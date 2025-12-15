@@ -81,8 +81,12 @@ abstract class Bundle {
 
         $days = floor($dateDiff / $secsPerDay);
 
+        if ($days > 100) {
+            return '<span class="infinite">∞</span>';
+        }
+
         if ($days < 0) {
-            return '<span style="color: red">Finished</span>';
+            return '<span class="finished">Finished</span>';
         }
 
         if ($days > 1) {
@@ -95,7 +99,7 @@ abstract class Bundle {
 
         $hours = floor($dateDiff / 3600);
         $minutes = floor(($dateDiff - $hours * 3600) % 60);
-        return '<span style="color:orange">' . $hours . 'h ' . $minutes . 'm</span>';
+        return '<span class="ending-soon">' . $hours . 'h ' . $minutes . 'm</span>';
     }
 
     /**

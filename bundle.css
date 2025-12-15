@@ -115,3 +115,15 @@ input:focus-visible + label {
     width: 15%;
     text-align: right;
 }
+
+.ending-soon {
+    color: orange;
+}
+
+.finished {
+    color: red;
+}
+
+.infinite {
+    
+}
