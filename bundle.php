@@ -95,7 +95,7 @@ abstract class Bundle {
 
         $hours = floor($dateDiff / 3600);
         $minutes = floor(($dateDiff - $hours * 3600) % 60);
-        return $hours . 'h ' . $minutes . 'm';
+        return '<span style="color:orange">' . $hours . 'h ' . $minutes . 'm</span>';
     }
 
     /**
