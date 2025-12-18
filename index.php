@@ -2,7 +2,19 @@
 require_once 'humble.php';
 require_once 'fanatical.php';
 
+define('NEWESTCOUNT', 8);
+
 $forceCacheClear = array_key_exists('clear', $_GET);
+
+$humbleUrl = 'https://www.humblebundle.com/bundles';
+$hb = new HumbleBundle('humble', $humbleUrl, $forceCacheClear, NEWESTCOUNT);
+$fanaticalUrl = 'https://www.fanatical.com/api/algolia/bundles?altRank=false';
+$fb = new FanaticalBundle('fanatical', $fanaticalUrl, $forceCacheClear, NEWESTCOUNT);
+
+$tabs = [
+    'humble' => $hb->renderBundles(),
+    'fanatical' => $fb->renderBundles(),
+];
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,38 +27,30 @@ $forceCacheClear = array_key_exists('clear', $_GET);
 </head>
 <body>
     <div class="tabset">
-        <input type="radio" name="tabset" id="tab1" aria-controls="humble" checked>
-        <label for="tab1">Humble</label>
-        <input type="radio" name="tabset" id="tab2" aria-controls="fanatical">
-        <label for="tab2">Fanatical</label>
+<?php
+    foreach (array_keys($tabs) as $idx => $id) {
+        $checked = ($idx == 0) ? 'checked' : '';
+        echo "<input type='radio' name='tabset' id='tab$id' aria-controls='$id' $checked>";
+        echo "<label for='tab$id'>$id</label>";
+    }
+?>
         <div class="tab-panels">
-            <section id="humble" class="tab-panel">
-<?php
-$url = 'https://www.humblebundle.com/bundles';
-$hb = new HumbleBundle('humble', $url, $forceCacheClear);
-echo $hb->renderBundles();
-?>
-            </section>
-            <section id="fanatical" class="tab-panel">
-<?php
-try {
-    $url = 'https://www.fanatical.com/api/algolia/bundles?altRank=false';
-    $fb = new FanaticalBundle('fanatical', $url, $forceCacheClear);
-    echo $fb->renderBundles();
-} catch (Exception $e) {
-    echo "<div>Blocked by a bot catcher. Please go to <a href='$url'>$url</a> in your browser and then reload this page.</div>";
-}
-?>
-            </section>
+            <?php 
+            foreach ($tabs as $id => $content) {
+                    echo "<section id='$id' class='tab-panel'>";
+                    echo $content;
+                    echo "</section>";
+            } 
+            ?>
         </div>
     </div>
 
-<script>
-$(document).ready(function() {
-	let humbletable = new DataTable('.humblebundletable', { order: [[2, 'desc']], pageLength: 50, paging: false });
-	let fanaticaltable = new DataTable('.fanaticalbundletable', { order: [[1, 'desc']], pageLength: 50, paging: false, info: false });
-});
-</script>
+    <script>
+    $(document).ready(function() {
+        let humbletable = new DataTable('.humblebundletable', { order: [[2, 'desc']], pageLength: 50, paging: false });
+        let fanaticaltable = new DataTable('.fanaticalbundletable', { order: [[1, 'desc']], pageLength: 50, paging: false, info: false });
+    });
+    </script>
 
 </body>
 </html>

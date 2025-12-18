@@ -4,9 +4,11 @@ abstract class Bundle {
     var $rawData;
     var $processedData;
     var $updateTime;
+    var $newestCount;
 
-    public function __construct($name, $url, $clearCache = false) {
+    public function __construct($name, $url, $clearCache = false, $newestCount = 5) {
         $this->bundleSource = $name;
+        $this->newestCount = $newestCount;
 
         $cacheFilename = "$name.json";
         $cacheDateLimit = strtotime('-1 day', time());
@@ -138,5 +140,5 @@ abstract class Bundle {
      * 
      * @return array
      */
-    abstract protected function getNewestBundles(int $bundleCount = 5) : array;
+    abstract protected function getNewestBundles() : array;
 }

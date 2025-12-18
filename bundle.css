@@ -44,6 +44,7 @@ body {
   border-bottom: 0;
   cursor: pointer;
   font-weight: 600;
+  text-transform: capitalize;
 }
 
 .tabset > label::after {

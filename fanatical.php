@@ -31,7 +31,7 @@ class FanaticalBundle extends Bundle
                 'title' => $product['name'],
                 'start' => $product['available_valid_from'],
                 'end' => $product['available_valid_until'],
-                'url' => 'en/' . $product['type'] . '/' . $product['slug'],
+                'url' => 'https://www.fanatical.com/en/' . $product['type'] . '/' . $product['slug'],
             ];
         }
         return $bundles;
@@ -63,10 +63,9 @@ class FanaticalBundle extends Bundle
     /**
      * Implement abstract method
      * 
-     * @param int $bundleCount
      * @return array
      */
-    public function getNewestBundles(int $bundleCount = 5): array {
+    public function getNewestBundles(): array {
         $result = [];
 
         foreach ($this->processedData as $type => $products) {
@@ -77,6 +76,6 @@ class FanaticalBundle extends Bundle
         usort($result, function($a, $b) {
             return $a['start'] - $b['start'];
         });
-        return array_slice($result, -$bundleCount);
+        return array_slice($result, -$this->newestCount);
     }
 }
