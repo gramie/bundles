@@ -1,5 +1,6 @@
 <?php
 require_once 'bundle.php';
+require_once 'Fetcher.php';
 
 class FanaticalBundle extends Bundle
 {
@@ -10,7 +11,12 @@ class FanaticalBundle extends Bundle
      * @return bool|string
      */
     public function getRawData(string $url): string {
-        $data = file_get_contents($url);
+        // Fanatical requires a cookie to be set (by visiting the bundle page) before 
+        // grabbing the bundle data
+        $fetcher = new Fetcher();
+        $bundlePage = $fetcher->get('https://www.fanatical.com/en/bundle');
+        
+        $data = $fetcher->get($url, true);
         return $data;
     }
 
