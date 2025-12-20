@@ -11,9 +11,12 @@ abstract class Bundle {
         $this->newestCount = $newestCount;
 
         $cacheFilename = "$name.json";
+        $cacheFileTime = filemtime($cacheFilename);
         $cacheDateLimit = strtotime('-1 day', time());
 
-        if (file_exists($cacheFilename) && ($clearCache || (filectime($cacheFilename) < $cacheDateLimit))) {
+        // echo ("Filename: $cacheFilename, File date: " . date('Y-m-d g:i', $cacheFileTime) . ', Cache limit: ' . date('Y-m-d g:i', $cacheDateLimit) . '<br />');
+
+        if (file_exists($cacheFilename) && ($clearCache || ($cacheFileTime < $cacheDateLimit))) {
             unlink($cacheFilename);
         }
 
